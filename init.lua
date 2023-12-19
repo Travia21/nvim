@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 -- Set up lazy.nvim
 
 -- vim.fn calls vimscript functions
@@ -15,5 +17,4 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy_conf")
-
 require("personal")
