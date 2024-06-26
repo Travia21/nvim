@@ -4,11 +4,16 @@ lspconfig.lua_ls.setup {
   settings = {
     Lua = {
       diagnostics = {
-        globals = {'vim'}
+        globals = { 'vim' },
       },
+      runtime = { version = 'LuaJIT' },
       workspace = {
-        library = vim.api.nvim_get_runtime_file("", true)
-      }
+        checkThirdParty = false,
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      completion = {
+        callSnippet = 'Replace',
+      },
     }
   }
 }
@@ -23,6 +28,19 @@ lspconfig.rust_analyzer.setup {
   },
 }
 
+-- Set ColorColumn at 100 when in Rust source files
+vim.api.nvim_create_augroup('RustSettings', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+    group = 'RustSettings',
+    pattern = 'rust',
+    callback = function()
+        vim.opt_local.colorcolumn = '100'
+        vim.opt.tabstop = 4
+        vim.opt.softtabstop = 4
+        vim.opt.shiftwidth = 4
+    end
+})
+
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
@@ -33,13 +51,13 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 -- Use LspAttach autocommand to only map the following keys after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-  callback = function(ev)
+  callback = function(event)
     -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+    vim.bo[event.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local opts = { buffer = ev.buf }
+    local opts = { buffer = event.buf }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)

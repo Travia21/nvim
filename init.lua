@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
+vim.g.have_nerd_font = true
 
--- Set up lazy.nvim
+--Set up lazy.nvim
 
 -- vim.fn calls vimscript functions
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
