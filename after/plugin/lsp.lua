@@ -1,13 +1,6 @@
-local lsp_zero = require('lsp-zero')
-local cmp = require('cmp')
+local lsp_zero = require("lsp-zero")
+local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-lsp_zero.defaults.cmp_mappings({
-  ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-  ['<C-Space>'] = cmp.mapping.complete()
-})
 
 lsp_zero.preset('recommended')
 
@@ -21,8 +14,7 @@ lsp_zero.on_attach(function(client, bufnr)
 
   vim.keymap.set("n", "gd",           function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set("n", "K",            function() vim.lsp.buf.hover() end, opts)
-  --workspace_symbols doesn't work
-  vim.keymap.set("n", "<leader>vws",  function() vim.lsp.buf.workspace_symbols() end, opts)
+  vim.keymap.set("n", "<leader>vws",  function() vim.lsp.buf.workspace_symbols() end, opts) --workspace_symbols doesn't work
   vim.keymap.set("n", "<leader>vd",   function() vim.diagnostic.open_float() end, opts)
   vim.keymap.set("n", "[d",           function() vim.diagnostic.goto_next() end, opts)
   vim.keymap.set("n", "]d",           function() vim.diagnostic.goto_prev() end, opts)
@@ -34,7 +26,19 @@ end)
 
 lsp_zero.setup()
 
+lsp_zero.defaults.cmp_mappings({
+  ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+  ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+  ['<C-Space>'] = cmp.mapping.complete()
+})
+
 cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.snippet.expand(args.body)
+    end,
+  },
   sources = {
     { name = "nvim_lsp" },
     { name = "buffer" },
@@ -43,10 +47,4 @@ cmp.setup({
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
-  mapping = cmp.mapping.preset.insert({
-    -- autocomplete
-    -- select = false: but only when an option is selected
-    ["<Tab>"] = cmp.mapping.confirm({select = false}), -- Seriously, Ctrl+y is terrible for autocomplete
-    ["<S-Tab>"] = cmp.mapping.confirm({select = true}), -- Shift+Tab for taking the top option
-  }),
 })
