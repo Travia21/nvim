@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 local trouble = require("trouble")
 
 trouble.setup({

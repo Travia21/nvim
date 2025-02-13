@@ -21,6 +21,10 @@ require("lazy").setup({
   },
 
   {
+    "nvim-treesitter/playground",
+  },
+
+  {
     "VonHeikemen/lsp-zero.nvim",
     dependencies = {
       -- LSP Support

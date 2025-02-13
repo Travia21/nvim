@@ -1,4 +1,4 @@
----@diagnostic disable: undefined-field
+---@diagnostic disable: undefined-field,unused-local
 local lsp_zero = require("lsp-zero")
 local luasnip = require("luasnip")
 local cmp = require("cmp")
@@ -39,14 +39,14 @@ cmp.setup({
         if luasnip.expandable() then
           luasnip.expand()
         else
-          cmp.mapping.confirm({ select = true, })
+          cmp.confirm({ select = true, })
         end
       end
     end, { "i", "s" }),
 
     ["<C-n>"] = cmp.mapping(function()
       if cmp.visible() then
-        cmp.mapping.select_next_item(cmp_select)
+        cmp.select_next_item(cmp_select)
       elseif luasnip.locally_jumpable(1) then
         luasnip.jump(1)
       end
@@ -54,7 +54,7 @@ cmp.setup({
 
     ["<C-p>"] = cmp.mapping(function()
       if cmp.visible() then
-        cmp.mapping.select_prev_item(cmp_select)
+        cmp.select_prev_item(cmp_select)
       elseif luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
       end
