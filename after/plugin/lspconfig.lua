@@ -23,7 +23,7 @@ lspconfig.rust_analyzer.setup {
   -- Server-specific settings. See `:help lspconfig-setup`
   settings = {
     ['rust-analyzer'] = {
-      diagnostics = { enable = false; },
+      diagnostics = { enable = false, },
     },
   },
 }
@@ -31,14 +31,14 @@ lspconfig.rust_analyzer.setup {
 -- Set ColorColumn at 100 when in Rust source files
 vim.api.nvim_create_augroup('RustSettings', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-    group = 'RustSettings',
-    pattern = 'rust',
-    callback = function()
-        vim.opt_local.colorcolumn = '100'
-        vim.opt.tabstop = 4
-        vim.opt.softtabstop = 4
-        vim.opt.shiftwidth = 4
-    end
+  group = 'RustSettings',
+  pattern = 'rust',
+  callback = function()
+    vim.opt_local.colorcolumn = '100'
+    vim.opt.tabstop = 4
+    vim.opt.softtabstop = 4
+    vim.opt.shiftwidth = 4
+  end
 })
 
 -- Global mappings.
@@ -58,22 +58,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = event.buf }
+    --vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts) --This is a default
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
     vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
     vim.keymap.set('n', '<leader>wl', function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts)
+    vim.keymap.set('n', '<leader>f', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
     vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<leader>f', function()
-      vim.lsp.buf.format { async = true }
-    end, opts)
   end,
 })

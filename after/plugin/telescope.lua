@@ -12,13 +12,9 @@ telescope.setup {
 --telescope.load_extension("fzf")
 
 local builtin = require('telescope.builtin')
--- [f]ind [f]iles
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
--- [f]ind [b]uffers
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
--- [f]ind [s]ymbols
-vim.keymap.set('n', '<leader>fs', builtin.lsp_workspace_symbols, {})
--- basically vim search
-vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, {})
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "telescope find files" })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "telescope live grep" })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "telescope find buffer" })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "telescope help tags" })
+vim.keymap.set('n', '<leader>fs', builtin.lsp_workspace_symbols, { desc = "telescope find symbol" })
+vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = "telescope fuzzy find in buffer" })
