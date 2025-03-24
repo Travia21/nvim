@@ -9,12 +9,6 @@ require("lazy").setup({
     end,
   },
 
-  { -- Just another colorscheme in case I want to copy ThePrimeagen
-    "rose-pine/neovim",
-    name = "rose-pine",
-    lazy = true,
-  },
-
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -46,6 +40,7 @@ require("lazy").setup({
       -- Snippets
       {
         "L3MON4D3/LuaSnip",
+        run = "make install_jsregexp",
         dependencies = {
           "saadparwaiz1/cmp_luasnip",
           "rafamadriz/friendly-snippets",
