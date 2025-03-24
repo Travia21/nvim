@@ -1,3 +1,5 @@
+-- This file is loaded last
+
 -- Some bindings for getting back to netrw (:Explore)
 vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle)
 vim.api.nvim_create_user_command("W", "w | NvimTreeOpen", {})

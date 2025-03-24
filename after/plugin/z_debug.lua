@@ -1,4 +1,4 @@
---DEBUGGING FUNCTION
+-- This file is meant to hold all my debugging functionality for Neovim itself
 
 vim.keymap.set({ 'n', 'i', 's' }, '<F5>', function()
   local ls = require('luasnip')
@@ -55,5 +55,3 @@ vim.keymap.set({ 'n', 'i', 's' }, '<F5>', function()
     end
   end, 2500)
 end, { desc = "Floating Window to help with Debugging Neovim" })
-
---END DEBUG
