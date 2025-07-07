@@ -10,9 +10,8 @@ personal
 After/plugin
 - Configures each installed plugin
 
-LSPs
-- This is hard
-- Current setup relies on neovim's default LSP, nvim-lspconfig, mason.nvim, and mason-lspconfig.nvim
+TODO
+- Add shortcut functionality for opening a window for trouble under cursor
 
 Commands Ran
 :TSInstall rust

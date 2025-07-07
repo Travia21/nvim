@@ -19,10 +19,8 @@ mason_lspconfig.setup({
     "cmake",
     "dockerls", --docker
     "docker_compose_language_service", --docker compose
-    -- "golangci_lint_ls", -- go | didn't work
     "jsonls",
     "jdtls", --java
-    -- "jqls", | didn't work
     "lua_ls",
     "marksman", --markdown
     "powershell_es",

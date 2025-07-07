@@ -41,6 +41,25 @@ vim.api.nvim_create_autocmd('FileType', {
   end
 })
 
+local util = require('lspconfig/util')
+lspconfig.jdtls.setup {
+  -- Use gradle or git as project management for Java
+  root_dir = util.root_pattern('build.gradle', 'settings.gradle', '.git'),
+  cmd = { 'jdtls' },
+  settings = {
+    ['jdtls'] = {
+      diagnostics = { enable = false, },
+      import = {
+        maven = { enabled = false, },
+        gradle = { wrapper = { enabled = true } },
+      },
+      eclipse = {
+        downloadSources = true
+      },
+    },
+  },
+}
+
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
