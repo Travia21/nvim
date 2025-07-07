@@ -1,4 +1,5 @@
 local lspconfig = require('lspconfig')
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 lspconfig.lua_ls.setup {
   settings = {
@@ -58,6 +59,44 @@ lspconfig.jdtls.setup {
       },
     },
   },
+}
+
+lspconfig.eslint.setup {
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+  settings = {
+    codeAction = {
+      disableRuleComment = {
+        enable = true,
+      },
+      showDocumentation = {
+        enable = true,
+      },
+    },
+    format = true,
+  }
+}
+
+lspconfig.ts_ls.setup {
+  capabilities = capabilities,
+  init_options = { hostInfo = "neovim" },
+  single_file_support = false,
+  settings = {
+    typescript = {
+      inlayHints = { includeInlayParameterNameHints = "all" },
+    },
+    javascript = {
+      inlayHints = { includeInlayParameterNameHints = "all" },
+    },
+  },
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+  end,
 }
 
 -- Global mappings.

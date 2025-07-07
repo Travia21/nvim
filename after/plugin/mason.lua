@@ -19,6 +19,7 @@ mason_lspconfig.setup({
     "cmake",
     "dockerls", --docker
     "docker_compose_language_service", --docker compose
+    "eslint",
     "jsonls",
     "jdtls", --java
     "lua_ls",
@@ -26,6 +27,7 @@ mason_lspconfig.setup({
     "powershell_es",
     "pyright", --python
     "rust_analyzer",
+    "ts_ls",
   },
   handlers = {
     require("lsp-zero").default_setup,
